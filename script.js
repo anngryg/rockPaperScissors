@@ -8,12 +8,14 @@ function getComputerChoice(){
 computerSelection = getComputerChoice();
 console.log(computerSelection);
 
-let playerInput = prompt("Rock, paper or scissors?");
-let playerSelection = playerInput.toLowerCase();
+function playRound (computerSelection) {
 
-function game(playerSelection,computerSelection) {
+    let playerInput = prompt("Rock, paper or scissors?");
+    let playerSelection = playerInput.toLowerCase();
+
     if (playerSelection!=="rock" && playerSelection!=="paper" && playerSelection!=="scissors"){
-        alert("Wrong input!")
+        alert("Wrong input!");
+        playRound(computerSelection);
     }
     else if(computerSelection===playerSelection){
         alert("It's a tie. Try again!")
@@ -29,15 +31,21 @@ function game(playerSelection,computerSelection) {
         }else{
             alert("You loose! Rock beats scissors!")
         }
-    }else if(computerSelection==="paper"){
+    }else if(playerSelection==="paper"){
         if (computerSelection==="rock"){
             alert("You win! Paper beats rock!")
         }else{
             alert("You loose! Scissors beat paper!")
         }
     }else{
-        alert("go home")
+        alert("Error")
     }
 };
 
-game(playerSelection,computerSelection)
+function game(){
+    for (i=0; i<5; i++){
+        playRound(computerSelection)}
+    alert("GAME OVER")
+}
+
+game()
