@@ -5,47 +5,71 @@ function getComputerChoice(){
     return randomChoice;
 };
 
-computerSelection = getComputerChoice();
-console.log(computerSelection);
-
-function playRound (computerSelection) {
-
-    let playerInput = prompt("Rock, paper or scissors?");
-    let playerSelection = playerInput.toLowerCase();
+function winner(playerSelection, computerSelection){
 
     if (playerSelection!=="rock" && playerSelection!=="paper" && playerSelection!=="scissors"){
-        alert("Wrong input!");
-        playRound(computerSelection);
+       return "Error";
     }
-    else if(computerSelection===playerSelection){
-        alert("It's a tie. Try again!")
-    }else if (playerSelection==="rock"){
-        if(computerSelection==="scissors"){
-            alert("You win! Rock beats scissors!")
+    if(computerSelection==playerSelection){
+            return "Tie";
+    }else if (playerSelection=="rock"){
+        if(computerSelection=="scissors"){
+            return "Player";
         }else{
-            alert("You loose! Paper beats rock!")
+            return "Computer";
         }
-    }else if (playerSelection==="scissors"){
-        if (computerSelection==="paper"){
-            alert("You win! Scissors beat paper!")
+    }else if (playerSelection=="scissors"){
+        if (computerSelection=="paper"){
+            return "Player";
         }else{
-            alert("You loose! Rock beats scissors!")
+            return "Computer";
         }
-    }else if(playerSelection==="paper"){
-        if (computerSelection==="rock"){
-            alert("You win! Paper beats rock!")
+    }else if(playerSelection=="paper"){
+        if (computerSelection=="rock"){
+            return "Player";
         }else{
-            alert("You loose! Scissors beat paper!")
+            return "Computer";
         }
     }else{
-        alert("Error")
+        return "XOXO";
     }
-};
-
-function game(){
-    for (i=0; i<5; i++){
-        playRound(computerSelection)}
-    alert("GAME OVER")
 }
 
+function playRound(playerSelection, computerSelection){
+    let result=winner(playerSelection, computerSelection);
+    
+    if(result=="Error"){
+        return `Wrong input`
+    }else if (result=="Tie"){
+        return "It's a Tie!"
+    }else if (result=="Player"){
+        return `You win, ${playerSelection} beats ${computerSelection}!`
+    }else{
+        return `You lose, ${computerSelection} beats ${playerSelection}!`
+    }
+}
+
+
+
+function game(){
+    let computerScore=0;
+    let playerScore=0;
+    for(let i=0; i<5; i++){
+        let computerSelection = getComputerChoice();
+        let playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+        console.log(playRound(playerSelection, computerSelection))
+        if(winner(playerSelection,computerSelection)=="Player"){
+            playerScore++;
+        }else if(winner(playerSelection,computerSelection)=="Computer"){
+            computerScore++;
+        }
+    }
+    if(playerScore==computerScore){
+        console.log(`It's a tie! Your score: ${playerScore}, computer score: ${computerScore}. Try again!`)
+    }else if(playerScore>computerScore){
+        console.log(`You won! Your score: ${playerScore}, computer score: ${computerScore} `)
+    }else if(playerScore<computerScore){
+        console.log(`You lose! Your score: ${playerScore}, computer score: ${computerScore} `)
+    }
+}
 game()
