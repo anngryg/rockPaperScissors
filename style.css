@@ -59,10 +59,15 @@ h1{
     h1{
         font-size: 2rem;
     }
+    
     .rpsButton{
-        height: 160px;
-        width: 120px;
-        font-size: 5rem;
+        border-radius: 25%;
+        padding: 0px;
+        font-size: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 5px 10px 5px;
     }
     
     .outcomePar {
